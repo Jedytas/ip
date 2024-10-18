@@ -1,202 +1,35 @@
-import random
 
-for _ in range(77):  # 30 циклов
-  
-    print("click 61 956")
-    print("delay 5000")
-
-    #1 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #2 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #3 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #4 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #5 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #6 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #7 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #8 клик
-
-    t = random.randint(3000, 5000)
-    x = random.randint(42, 411)
-    y = random.randint(343, 725)
-    print(f"click {x} {y}")
-    print(f"delay {t}")
-
-    x2 = random.randint(150, 399)
-    y2 = random.randint(910, 937)
-    print(f"click {x2} {y2}")
-    print("delay 1500")
-
-    #Клик на колво монет
-
-    x = random.randint(236, 315)
-    y = random.randint(120, 146)
-    print(f"click {x} {y}")
-    print("delay 3232")
-
-    #Клик на сбор монет
-
-    x = random.randint(116, 436)
-    y = random.randint(553, 577)
-    print(f"click {x} {y}")
-    print("delay 2323")
-
-    #Выход из меню сбора монет
-
-    print("click 33 71")
-    print("delay 750")
-    print("click 33 71")
-    print("delay 4800000")
-
-    print()
-    print()
-input("Нажмите Enter для выхода...")
+#Дана строка -  текст заклинания, заканчивающийся точкой. Необходимо зашифровать 
+# его по следующему правилу. Сначала определить длину самого короткого слова 
+# в тексте и обозначить полученное число как K. Затем заменить каждую английскую
+# букву в тексте на букву, которая находится в английском алфавите на K позиций ранее. 
+# При этом строчные буквы остаются строчными, а прописные - прописными. 
+# Остальные символы остаются неизменными. Программа должна вывести на экран
+# текст зашифрованного заклинания. Например, если исходный текст был таким:
+#Zb Ra Ca Dab Ra. 
+#то результат шифровки должен быть следующий:
+#Xz Py Ay Byz Py.
 
 
 
+def shift_char(char, shift):
+    if 'a' <= char <= 'z':
+        return chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
+    elif 'A' <= char <= 'Z':
+        return chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+    else:
+        return char
 
-import random
-import sys
 
-# Открываем файл для записи с расширением .txt
-with open('output.txt', 'w') as f:
-    # Перенаправляем стандартный вывод в файл
-    sys.stdout = f
+def encrypt_spell(str1):
+    words = str1.split()
+    min_len = min(len(word) for word in words if word.isalpha())
+    encrypted_text = ''.join(shift_char(char, min_len) for char in str1)
+    return encrypted_text
 
-    for _ in range(77):  # 77 циклов
-        print("click 61 956")
-        print("delay 5000")
 
-        # 1 клик
-        t = random.randint(3000, 5000)
-        x = random.randint(42, 411)
-        y = random.randint(343, 725)
-        print(f"click {x} {y}")
-        print(f"delay {t}")
+str1 = input("Введите текст заклинания: ")
 
-        x2 = random.randint(150, 399)
-        y2 = random.randint(910, 937)
-        print(f"click {x2} {y2}")
-        print("delay 1500")
 
-        # Остальные клики, задержки и действия
-        for _ in range(7):  # ещё 7 кликов (итого 8)
-            t = random.randint(3000, 5000)
-            x = random.randint(42, 411)
-            y = random.randint(343, 725)
-            print(f"click {x} {y}")
-            print(f"delay {t}")
-
-            x2 = random.randint(150, 399)
-            y2 = random.randint(910, 937)
-            print(f"click {x2} {y2}")
-            print("delay 1500")
-
-        # Клик на количество монет
-        x = random.randint(236, 315)
-        y = random.randint(120, 146)
-        print(f"click {x} {y}")
-        print("delay 3232")
-
-        # Клик на сбор монет
-        x = random.randint(116, 436)
-        y = random.randint(553, 577)
-        print(f"click {x} {y}")
-        print("delay 2323")
-
-        # Выход из меню сбора монет
-        print("click 33 71")
-        print("delay 750")
-        print("click 33 71")
-        print("delay 4800000")
-
-        print()  # Пустая строка между циклами
-        print()
-
-# Выводим сообщение в консоль, так как sys.stdout возвращён в стандартный вывод
-sys.stdout = sys.__stdout__
-print("Результаты сохранены в файл 'output.txt'")
-input("Нажмите Enter для выхода...")
-
+encrypt_str1 = encrypt_spell(str1)
+print("Зашифрованное закливание: ", encrypt_str1)
