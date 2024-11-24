@@ -100,7 +100,7 @@ print("\nПосле таяния на 1 шаг:")
 snowflake.show()
 
 snowflake.thaw(1)
-print("\nПосле таяния на 2 шага:")
+print("\nПосле таяния еще на 1 шаг:")
 snowflake.show()
 
 snowflake.freeze(3)
@@ -111,6 +111,6 @@ snowflake.thicken()
 print("\nПосле утолщения снежинки:")
 snowflake.show()
 
-decorated_snowflake = DecoratedSnowFlake(5, '$')
+decorated_snowflake = DecoratedSnowFlake(9, '#')
 print("\nУкрашенная снежинка:")
 print(decorated_snowflake)
