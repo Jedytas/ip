@@ -1,16 +1,17 @@
-# Класс «Снежинка» (SnowFlake)
-
-# При инициализации класс принимает целое нечетное число – сторону квадрата, в который вписана снежинка.
-
-# Методы:
-# – thaw() – таять, при этом на каждом шаге пропадают крайние звездочки со всех сторон; параметр показывает, сколько шагов прошло.
-# – freeze(n) – намораживаться, при этом сторона квадрата, в который вписана снежинка, увеличивается на 2 * n, одновременно добавляются звездочки в нужных местах, чтобы правило соблюдалось.
-# – thicken() – утолщаться, ко всем линиям звездочек с двух сторон добавляются параллельные (если перед этим снежинка таяла, то теперь звездочки восстанавливаются).
-# – show() – показывать (рисуется снежинка в виде квадратной матрицы со звездочками и дефисами в пустых местах).
-
-# Создать класс-наследник от класса «Снежинка», например, «Украшенная снежинка». 
-
-# Обязательно использование конструктора, декораторов и метода __str__.
+# Декоратор для проверки корректности входных данных методов thaw и freeze
+def validate_args(func):  # Изменение: добавлен декоратор
+    """Декоратор для проверки корректности входных данных методов."""
+    def wrapper(self, *args, **kwargs):
+        if func.__name__ == "thaw":
+            steps = args[0]  # Первый аргумент метода thaw — это steps
+            if steps < 0 or steps > self.side_length // 2:
+                raise ValueError("Некорректное количество шагов для таяния!")
+        elif func.__name__ == "freeze":
+            n = args[0]  # Первый аргумент метода freeze — это n
+            if n < 0:
+                raise ValueError("Параметр n для заморозки должен быть неотрицательным!")
+        return func(self, *args, **kwargs)
+    return wrapper
 
 
 class SnowFlake:
@@ -30,6 +31,7 @@ class SnowFlake:
                     matrix[i][j] = '*'
         return matrix
 
+    @validate_args  # Изменение: декоратор для проверки аргументов thaw
     def thaw(self, steps):
         """Таять снежинку, теряя крайние звездочки с каждой стороны."""
         for _ in range(steps):
@@ -37,6 +39,7 @@ class SnowFlake:
                 self.side_length -= 2
                 self.snowflake = self._create_snowflake(self.side_length)
 
+    @validate_args  # Изменение: декоратор для проверки аргументов freeze
     def freeze(self, n):
         """Замораживать снежинку, увеличивая ее размер на 2 * n и добавляя звездочки."""
         self.side_length += 2 * n
@@ -66,7 +69,6 @@ class SnowFlake:
         return '\n'.join([' '.join(row) for row in self.snowflake])
 
 
-# Класс-наследник от SnowFlake
 class DecoratedSnowFlake(SnowFlake):
     def __init__(self, side_length, decoration):
         super().__init__(side_length)
@@ -90,27 +92,22 @@ class DecoratedSnowFlake(SnowFlake):
         self.decorate()
         return super().__str__()
 
+
 # Пример использования
-snowflake = SnowFlake(9)
+snowflake = SnowFlake(5)
 print("Исходная снежинка:")
 snowflake.show()
 
-snowflake.thaw(1)
+snowflake.thaw(1)  # Корректное число шагов
 print("\nПосле таяния на 1 шаг:")
 snowflake.show()
 
-snowflake.thaw(1)
-print("\nПосле таяния еще на 1 шаг:")
+snowflake.freeze(2)  # Корректное значение n
+print("\nПосле заморозки:")
 snowflake.show()
 
-snowflake.freeze(3)
-print("\nПосле замораживания на 3 шага:")
-snowflake.show()
-
-snowflake.thicken()
-print("\nПосле утолщения снежинки:")
-snowflake.show()
-
-decorated_snowflake = DecoratedSnowFlake(9, '#')
-print("\nУкрашенная снежинка:")
-print(decorated_snowflake)
+# Попытка вызвать с некорректными данными:
+try:
+    snowflake.thaw(10)  # Некорректное число шагов
+except ValueError as e:
+    print(f"\nОшибка: {e}")
