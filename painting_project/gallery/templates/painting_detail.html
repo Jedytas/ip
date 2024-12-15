@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ object.title }}</title>
+</head>
+<body>
+    <h1>{{ object.title }}</h1>
+    <p><strong>Artist:</strong> {{ object.artist.name }}</p>
+    <p><strong>Creation Date:</strong> {{ object.creation_date }}</p>
+    <p>{{ object.description }}</p>
+    <a href="{% url 'painting-edit' object.id %}">Edit Painting</a>
+    <br>
+    <a href="{% url 'painting-list' %}">Back to List</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+python manage.py shell
+
+
+
+from gallery.models import Artist, Painting, Gallery
+
+
+Artist.objects.create(name='Ван Гог', biography='Винсент Ван Гог был выдающимся голландским живописцем, известным своими яркими цветами и драматическими мазками.')
+Artist.objects.create(name='Пабло Пикассо', biography='Пабло Пикассо был испанским художником, основателем кубизма и одним из самых влиятельных художников XX века.')
+Artist.objects.create(name='Леонардо да Винчи', biography='Леонардо да Винчи был итальянским художником, ученым и изобретателем эпохи Ренессанса.')
+Artist.objects.create(name='Клод Моне', biography='Клод Моне был французским художником, основателем импрессионизма.')
+Artist.objects.create(name='Густав Климт', biography='Густав Климт был австрийским художником, известным своими декоративными и эротическими произведениями.')
+
+
+Painting.objects.create(title='Звездная ночь', description='Звездная ночь - одна из самых известных картин Ван Гога, изображающая ночное небо с яркими звездами и луной.', artist=Artist.objects.get(name='Ван Гог'), creation_date='1889-06-01')
+Painting.objects.create(title='Герника', description='Герника - знаменитая картина Пикассо, изображающая трагедию войны, особенно испанскую гражданскую войну.', artist=Artist.objects.get(name='Пабло Пикассо'), creation_date='1937-04-01')
+Painting.objects.create(title='Мона Лиза', description='Мона Лиза - знаменитая картина Леонардо да Винчи, одна из самых известных картин в мире, известная своим таинственным выражением лица.', artist=Artist.objects.get(name='Леонардо да Винчи'), creation_date='1503-05-01')
+Painting.objects.create(title='Впечатление. Восходящее солнце', description='Впечатление. Восходящее солнце - картина Клода Моне, от которой и произошло название художественного течения импрессионизма.', artist=Artist.objects.get(name='Клод Моне'), creation_date='1872-11-01')
+Painting.objects.create(title='Поцелуй', description='Поцелуй - картина Густава Климта, знаменитая своими золотыми оттенками и эротическим изображением.', artist=Artist.objects.get(name='Густав Климт'), creation_date='1907-08-01')
+
+
+gallery1 = Gallery.objects.create(name='Музей Ван Гога', location='Амстердам, Нидерланды')
+gallery1.paintings.set([Painting.objects.get(title='Звездная ночь')])
+
+gallery2 = Gallery.objects.create(name='Музей Пикассо', location='Малага, Испания')
+gallery2.paintings.set([Painting.objects.get(title='Герника')])
+
+gallery3 = Gallery.objects.create(name='Лувр', location='Париж, Франция')
+gallery3.paintings.set([Painting.objects.get(title='Мона Лиза')])
+
+gallery4 = Gallery.objects.create(name='Музей Орсе', location='Париж, Франция')
+gallery4.paintings.set([Painting.objects.get(title='Впечатление. Восходящее солнце')])
+
+gallery5 = Gallery.objects.create(name='Австрийская галерея Бельведер', location='Вена, Австрия')
+gallery5.paintings.set([Painting.objects.get(title='Поцелуй')])
